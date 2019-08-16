@@ -2,7 +2,6 @@
   "annotations": {
     "list": [
       {
-        "$$hashKey": "object:429",
         "builtIn": 1,
         "datasource": "-- Grafana --",
         "enable": true,
@@ -17,7 +16,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1520585594614,
+  "iteration": 1565955073957,
   "links": [],
   "panels": [
     {
@@ -445,7 +444,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -541,7 +544,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -629,7 +636,11 @@
           "min": null,
           "show": false
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "cacheTimeout": null,
@@ -757,7 +768,7 @@
       "renderer": "flot",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": false,
+      "stack": true,
       "steppedLine": false,
       "targets": [
         {
@@ -803,7 +814,11 @@
           "min": null,
           "show": false
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -842,7 +857,7 @@
       "renderer": "flot",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": false,
+      "stack": true,
       "steppedLine": false,
       "targets": [
         {
@@ -896,7 +911,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "cacheTimeout": null,
@@ -1019,7 +1038,7 @@
       "renderer": "flot",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": false,
+      "stack": true,
       "steppedLine": false,
       "targets": [
         {
@@ -1065,7 +1084,11 @@
           "min": null,
           "show": false
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -1150,7 +1173,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -1236,7 +1263,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -1325,7 +1356,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -1416,7 +1451,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "cacheTimeout": null,
@@ -1586,7 +1625,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -1674,7 +1717,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "columns": [
@@ -1707,7 +1754,7 @@
           "alias": "Time",
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "pattern": "Time",
-          "type": "hidden"
+          "type": "date"
         },
         {
           "alias": "",
@@ -1728,7 +1775,6 @@
         {
           "expr": "sum(engine_daemon_engine_info * on(instance) group_left(node_id) swarm_node_info) by (kernel, os, graphdriver, version, node_id)",
           "format": "table",
-          "instant": true,
           "intervalFactor": 2,
           "legendFormat": "",
           "refId": "A",
@@ -1737,7 +1783,7 @@
       ],
       "timeFrom": "1s",
       "title": "Docker Engine Info",
-      "transform": "timeseries_to_rows",
+      "transform": "table",
       "type": "table"
     }
   ],
@@ -1765,11 +1811,11 @@
         "query": "node_meta",
         "refresh": 2,
         "regex": "/node_id=\"([^\"]+)\"/",
+        "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "label_values({node_id=\"$tag\"},node_name)",
         "tags": [
-          "ofdocker",
-          "ofmon"
+          "ip-172-31-1-237"
         ],
         "tagsQuery": "label_values(node_meta, node_name)",
         "type": "query",
@@ -1845,6 +1891,7 @@
         ],
         "query": "1m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
         "refresh": 2,
+        "skipUrlSync": false,
         "type": "interval"
       }
     ]

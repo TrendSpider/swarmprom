@@ -77,7 +77,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(1, sum(chartmodel_chart_ttfb_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(1, sum(delta(chartmodel_chart_ttfb_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -85,21 +85,21 @@
           "refId": "A"
         },
         {
-          "expr": "histogram_quantile(.95, sum(chartmodel_chart_ttfb_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(.95, sum(delta(chartmodel_chart_ttfb_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "95 Percentile",
           "refId": "B"
         },
         {
-          "expr": "histogram_quantile(.75, sum(chartmodel_chart_ttfb_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(.75, sum(delta(chartmodel_chart_ttfb_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "75 Percentile",
           "refId": "C"
         },
         {
-          "expr": "histogram_quantile(.01, sum(chartmodel_chart_ttfb_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(.01, sum(delta(chartmodel_chart_ttfb_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Min",
@@ -148,6 +148,296 @@
       }
     },
     {
+      "aliasColors": {
+        "Max": "#bf1b00",
+        "Min": "#bf1b00"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 6,
+        "y": 1
+      },
+      "id": 45,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "histogram_quantile(1, sum(delta(chartmodel_mdc_getData_seconds_bucket[5m])) by (le))",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Max",
+          "refId": "A"
+        },
+        {
+          "expr": "histogram_quantile(.95, sum(delta(chartmodel_mdc_getData_seconds_bucket[5m])) by (le))",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "95 Percentile",
+          "refId": "B"
+        },
+        {
+          "expr": "histogram_quantile(.75, sum(delta(chartmodel_mdc_getData_seconds_bucket[5m])) by (le))",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "75 Percentile",
+          "refId": "C"
+        },
+        {
+          "expr": "histogram_quantile(.01, sum(delta(chartmodel_mdc_getData_seconds_bucket[5m])) by (le))",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Min",
+          "refId": "D"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Market data connection, GetHistory delay",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "s",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 12,
+        "y": 1
+      },
+      "id": 52,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "delta(chartmodel_mdc_getData_fatal_errors[1m])",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Fatals",
+          "refId": "A"
+        },
+        {
+          "expr": "delta(chartmodel_mdc_getData_errors[1m])",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Errors(Recovered)",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Market data connection,  Errors",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 0,
+        "y": 7
+      },
+      "id": 25,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "chartmodel_users_number",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Instance {{instance}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Active users",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -158,7 +448,7 @@
         "h": 6,
         "w": 6,
         "x": 6,
-        "y": 1
+        "y": 7
       },
       "id": 19,
       "legend": {
@@ -244,92 +534,7 @@
         "h": 6,
         "w": 6,
         "x": 12,
-        "y": 1
-      },
-      "id": 25,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "chartmodel_users_number",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Instance {{instance}}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Active users",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fill": 1,
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 18,
-        "y": 1
+        "y": 7
       },
       "id": 17,
       "legend": {
@@ -369,211 +574,6 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Active Chartmodels",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {
-        "Max": "#bf1b00",
-        "Min": "#bf1b00"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fill": 0,
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 0,
-        "y": 7
-      },
-      "id": 45,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "histogram_quantile(1, sum(chartmodel_mdc_getData_seconds_bucket{le!=\"15\"}) by (le))",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Max",
-          "refId": "A"
-        },
-        {
-          "expr": "histogram_quantile(.95, sum(chartmodel_mdc_getData_seconds_bucket{le!=\"15\"}) by (le))",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "95 Percentile",
-          "refId": "B"
-        },
-        {
-          "expr": "histogram_quantile(.75, sum(chartmodel_mdc_getData_seconds_bucket{le!=\"15\"}) by (le))",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "75 Percentile",
-          "refId": "C"
-        },
-        {
-          "expr": "histogram_quantile(.01, sum(chartmodel_mdc_getData_seconds_bucket{le!=\"15\"}) by (le))",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Min",
-          "refId": "D"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Market data connection, GetHistory delay",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "s",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fill": 1,
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 6,
-        "y": 7
-      },
-      "id": 52,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "delta(chartmodel_mdc_getData_fatal_errors[5m])",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Fatals",
-          "refId": "A"
-        },
-        {
-          "expr": "delta(chartmodel_mdc_getData_errors[5m])",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Errors",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Market data connection,  Errors (5m)",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -767,14 +767,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "delta(alerts_notif_sent__email[5m])",
+          "expr": "delta(alerts_notif_sent__email[1m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Email",
           "refId": "A"
         },
         {
-          "expr": "delta(alerts_notif_sent__sms[5m])",
+          "expr": "delta(alerts_notif_sent__sms[1m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "SMS",
@@ -861,7 +861,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "delta(alerts_alerts_created[5m])",
+          "expr": "increase(alerts_alerts_created[1m])",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -870,7 +870,7 @@
           "refId": "A"
         },
         {
-          "expr": "delta(alerts_alerts_fired[5m])",
+          "expr": "increase(alerts_alerts_fired[1m])",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -879,7 +879,7 @@
           "refId": "B"
         },
         {
-          "expr": "delta(alerts_alerts_expired[5m])",
+          "expr": "increase(alerts_alerts_expired[1m])",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -887,21 +887,21 @@
           "refId": "C"
         },
         {
-          "expr": "delta(alerts_alert_error__fatal[5m])",
+          "expr": "increase(alerts_alert_error__fatal[1m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Fatal Error",
           "refId": "D"
         },
         {
-          "expr": "delta(alerts_alert_error__nonfatal[5m])",
+          "expr": "increase(alerts_alert_error__nonfatal[1m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Non Fatal Error",
           "refId": "E"
         },
         {
-          "expr": "delta(alerts_alert_check[5m])",
+          "expr": "increase(alerts_alert_check[1m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Check",
@@ -991,7 +991,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(1, sum(alerts_mdc_getData_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(1, sum(delta(alerts_mdc_getData_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -999,21 +999,21 @@
           "refId": "A"
         },
         {
-          "expr": "histogram_quantile(.95, sum(alerts_mdc_getData_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(.95, sum(delta(alerts_mdc_getData_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "95 Percentile",
           "refId": "B"
         },
         {
-          "expr": "histogram_quantile(.75, sum(alerts_mdc_getData_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(.75, sum(delta(alerts_mdc_getData_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "75 Percentile",
           "refId": "C"
         },
         {
-          "expr": "histogram_quantile(.01, sum(alerts_mdc_getData_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(.01, sum(delta(alerts_mdc_getData_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "MIn",
@@ -1098,7 +1098,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "delta(alerts_mdc_getData_fatal_errors[5m])",
+          "expr": "delta(alerts_mdc_getData_fatal_errors[1m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1106,18 +1106,18 @@
           "refId": "A"
         },
         {
-          "expr": "delta(alerts_mdc_getData_errors[5m])",
+          "expr": "delta(alerts_mdc_getData_errors[1m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "Errors",
+          "legendFormat": "Errors(Recovered)",
           "refId": "B"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Market data connection,  Errors (5m)",
+      "title": "Market data connection,  Errors",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1212,7 +1212,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(1, sum(datafeed_history_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(1, sum(delta(datafeed_history_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1220,21 +1220,21 @@
           "refId": "A"
         },
         {
-          "expr": "histogram_quantile(.95, sum(datafeed_history_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(.95, sum(delta(datafeed_history_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "95 Percentile",
           "refId": "B"
         },
         {
-          "expr": "histogram_quantile(.75, sum(datafeed_history_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(.75, sum(delta(datafeed_history_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "75 Percentile",
           "refId": "C"
         },
         {
-          "expr": "histogram_quantile(.01, sum(datafeed_history_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(.01, sum(delta(datafeed_history_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "MIn",
@@ -1324,7 +1324,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(1, sum(datafeed_resolve_symbol_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(1, sum(delta(datafeed_resolve_symbol_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1332,21 +1332,21 @@
           "refId": "A"
         },
         {
-          "expr": "histogram_quantile(.95, sum(datafeed_resolve_symbol_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(.95, sum(delta(datafeed_resolve_symbol_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "95 Percentile",
           "refId": "B"
         },
         {
-          "expr": "histogram_quantile(.75, sum(datafeed_resolve_symbol_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(.75, sum(delta(datafeed_resolve_symbol_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "75 Percentile",
           "refId": "C"
         },
         {
-          "expr": "histogram_quantile(.01, sum(datafeed_resolve_symbol_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(.01, sum(delta(datafeed_resolve_symbol_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Min",
@@ -1436,7 +1436,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(1, sum(datafeed_barcharts_history_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(1, sum(delta(datafeed_barcharts_history_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1444,21 +1444,21 @@
           "refId": "A"
         },
         {
-          "expr": "histogram_quantile(.95, sum(datafeed_barcharts_history_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(.95, sum(delta(datafeed_barcharts_history_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "95 Percentile",
           "refId": "B"
         },
         {
-          "expr": "histogram_quantile(.75, sum(datafeed_barcharts_history_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(.75, sum(delta(datafeed_barcharts_history_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "75 Percentile",
           "refId": "C"
         },
         {
-          "expr": "histogram_quantile(.01, sum(datafeed_barcharts_history_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(.01, sum(delta(datafeed_barcharts_history_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Min",
@@ -1548,7 +1548,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(1, sum(datafeed_coinapi_history_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(1, sum(delta(datafeed_coinapi_history_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1556,21 +1556,21 @@
           "refId": "A"
         },
         {
-          "expr": "histogram_quantile(.95, sum(datafeed_coinapi_history_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(.95, sum(delta(datafeed_coinapi_history_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "95 Percentile",
           "refId": "B"
         },
         {
-          "expr": "histogram_quantile(.75, sum(datafeed_coinapi_history_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(.75, sum(delta(datafeed_coinapi_history_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "75 Percentile",
           "refId": "C"
         },
         {
-          "expr": "histogram_quantile(.01, sum(datafeed_coinapi_history_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(.01, sum(delta(datafeed_coinapi_history_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Min",
@@ -2085,7 +2085,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(1, sum(backtester_mdc_getData_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(1, sum(delta(backtester_mdc_getData_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -2093,21 +2093,21 @@
           "refId": "A"
         },
         {
-          "expr": "histogram_quantile(.95, sum(backtester_mdc_getData_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(0.95, sum(delta(backtester_mdc_getData_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "95 Percentile",
           "refId": "B"
         },
         {
-          "expr": "histogram_quantile(.75, sum(backtester_mdc_getData_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(0.75, sum(delta(backtester_mdc_getData_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "75 Percentile",
           "refId": "C"
         },
         {
-          "expr": "histogram_quantile(.01, sum(backtester_mdc_getData_seconds_bucket{le!=\"15\"}) by (le))",
+          "expr": "histogram_quantile(0.01, sum(delta(backtester_mdc_getData_seconds_bucket[5m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Min",
@@ -2192,7 +2192,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "delta(backtester_mdc_getData_fatal_errors[5m])",
+          "expr": "delta(backtester_mdc_getData_fatal_errors[1m])",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -2201,19 +2201,19 @@
           "refId": "A"
         },
         {
-          "expr": "delta(chartmodel_mdc_getData_errors[5m])",
+          "expr": "delta(chartmodel_mdc_getData_errors[1m])",
           "format": "time_series",
           "instant": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "Errors",
+          "legendFormat": "Errors(Recovered)",
           "refId": "B"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Market data connection,  Errors (5m)",
+      "title": "Market data connection,  Errors",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2285,5 +2285,5 @@
   "timezone": "",
   "title": "TrendSpider Microservices",
   "uid": "e6FHFkvZk",
-  "version": 47
+  "version": 7
 }

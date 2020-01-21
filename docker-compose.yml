@@ -158,7 +158,7 @@ services:
       - metrics_pipe_network
 
     environment:
-      - JOBS=trendspider_datafeed:80 trendspider_alerts:80 trendspider_backtester:80 trendspider_chartmodel:80
+      - JOBS=trendspider_datafeed:80 trendspider_alerts:80 trendspider_backtester:80 trendspider_chartmodel:80 trendspider_usersettings:80 scanner_worker:80 scanner_webserver:80
 
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'

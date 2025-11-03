@@ -44,10 +44,13 @@ services:
           memory: 64M
 
   cadvisor:
-    image: google/cadvisor
+    image: gcr.io/cadvisor/cadvisor:v0.52.1
     networks:
       - net
-    command: -logtostderr -docker_only
+    command:
+      - '--docker_only=true'
+      - '--housekeeping_interval=30s'
+      - '--disable_metrics=perf_event,disk,diskIO,hugetlb,cpu_topology,resctrl,cpuset,advtcp,memory_numa,tcp,udp,percpu,sched,process,referenced_memory'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /:/rootfs:ro
@@ -61,6 +64,7 @@ services:
           memory: 128M
         reservations:
           memory: 64M
+
 
   grafana:
     image: stefanprodan/swarmprom-grafana:5.3.4
